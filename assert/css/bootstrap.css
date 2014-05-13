@@ -277,7 +277,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #fff;
+  background-color: #bbb;
 }
 input,
 button,
@@ -4368,7 +4368,7 @@ a.list-group-item.active > .badge,
   padding: 30px;
   margin-bottom: 30px;
   color: inherit;
-  background-color: #eee;
+  background-color: #bbb;
 }
 .jumbotron h1,
 .jumbotron .h1 {

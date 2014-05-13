@@ -7,128 +7,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link href="css/carousel.css" rel="stylesheet">
 
-    <title>Panel Administración</title>
+    <title>GeoAlertWeb</title>
 
-    
-    
-    <link href="assert//css/bootstrap.min.css" rel="stylesheet">
-    <link href="assert//css/dashboard.css" rel="stylesheet">
+    <link href="assert/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assert/css/jumbotron-narrow.css" rel="stylesheet">
 
   </head>
-
-  
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Administrar</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
+      
+   <div class="col-sm-5 col-sm-offset-1 col-md-6 col-md-offset-2 main">
+    
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="text-muted">Panel Login Geo-Alert</h3>
       </div>
-    </div>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Tabla</a></li>
-            <li><a href="#">Mapas</a></li>
-            <li><a href="#">Registrar Nuevo</a></li>
-            
-          </ul>
-          
-        </div>
-          
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">  
-        <h1>Panel de Administración</h1>
+      <div class="jumbotron">
+        <h1>Geographics-Alert <small></small></h1>
+        <p class="lead">Recomendaciones basadas en el pocisionamiento geografico.</p>
+      
       </div>
-              
-          </div>
-          
-          
-        <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-          
-          <h2 class="sub-header">Puntos de Interes</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                    
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Latitud</th>
-                  <th>Longitud</th>
-                  <th>Dirección</th>
-                  <th>Tipo</th>
-                  <th>Prioridad</th>
-                  
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Bar la Alternativa</td>
-                  <td>37.188770</td>
-                  <td>-3.608767</td>
-                  <td>Calle Doctor Azpitarte nº 12, 18012 Granada</td>
-                  <td>1</td>
-                  <td>Bar</td>
-                </tr>
-               
-              </tbody>
-            </table>
-          </div>
-        </div>
+        
  
-    <!--Panel de usuario-->      
-          <div class="col-xs-2 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
-          <div class="list-group">
-            <a href="#" class="list-group-item active">Jose Miguel</a>
-            <img src="assert//img/josemlp91.jpg"  alt="..."  class="img-responsive">
-            <a href="#" class="list-group-item">Ingeniero Informatico</a>
-            <a href="#" class="list-group-item">660281871</a>
-            <a href="#" class="list-group-item">josemilope@gmail.com</a>
-            <a href="#" class="list-group-item">Montefrio (Granada)</a>           
-            <a href="#" class="list-group-item">3 Septiembre 1991</a>
-          </div>     
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+          
+    </div>
+ </div> 
+      
+      <div class="col-xs-2 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
+           
+
+      <form class="form-signin" role="form">
+        <h2 class="form-signin-heading">Login</h2>
+        <input type="email" class="form-control" placeholder="Email" required autofocus>
+        <input type="password" class="form-control" placeholder="Password" required>
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" onclick="location.href = 'panel.html';" >Sign in</button>
+      </form>
+             
         </div><!--/span-->
        
-      </div><!--/row-->
-          
-      </div>
-      
-
-    </div>
-    
-    
-          <footer>
         
-        
-      </footer>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="assert/js/bootstrap.min.js"></script>
-    
+    <script src="aassert/js/bootstrap.min.js"></script>
+    <script src="aassert/js/docs.min.js"></script>
   </body>
 </html>
