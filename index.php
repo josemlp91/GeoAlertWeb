@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="css/carousel.css" rel="stylesheet">
+    
 
     <title>GeoAlertWeb</title>
 
@@ -44,9 +44,11 @@
            function verificar_login($user,$password,&$result) { 
                  include 'mongoConexion.php';
                     $users = $db->users;
-                    $qry = array("user" => $usr_email,"pass" => md5($usr_password));
+                    $qry = array("user" => $user,"pass" => md5($password));
                     $result = $users->findOne($qry);
                     $result=$result['user'];
+                    
+                    var_dump($result);
                     
                     if($result){
                         
@@ -63,42 +65,41 @@
            if(!isset($_SESSION['userid'])){
                
                 if(isset($_POST['login'])){
+                     
                       if(verificar_login($_POST['user'],$_POST['pass'],$result) == 1){
-                            $_SESSION['userid'] = $result->idusuario; 
-                            header("location:index.php"); 
-                            echo '<div ">Bien.</div>'; 
+                            $_SESSION['userid'] = $_POST['user']; 
+                            header("Location: panel.php");
+                            
+                            
                                                   
-                      }
-                     echo '<div class="error">Su usuario es incorrecto, intente nuevamente.</div>'; 
+                      }else{
+                        echo '<div class="error">Su usuario es incorrecto, intente nuevamente.</div>'; 
+                        
                     
+                    }
+               
+               
                 }
-               
-               
+                
            }
           
- /*           
-                           
-             $newUsers = array(
-             array(
-                 'user' => 'josemlp@correo.ugr.es', 
-                 'pass' => '12345',           
-             )
-         );
-             
+            
+     
+  
+           
              include 'mongoConexion.php';
            
            $users = $db->users;
            
-           $insert = array("user" => "jose", "pass" => md5("12345"));
-           
-           $users->insert($insert);
+     //       $insert = array("user" => "jose@ugr.es", "pass" => md5("12345"));      
+     //       $users->insert($insert);
            
            $cursor = $users->find();
            foreach ($cursor as $doc) {
                 var_dump($doc);
             }
            
-*/          
+      
            
            ?>
        </div> 
@@ -112,25 +113,42 @@
     </div>
  </div> 
       
+ 
+ 
       <div class="col-xs-2 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
 
-       
-
-      <form class="form-signin" role="form" action="index.php" method="POST">
-        <h2 class="form-signin-heading">Login</h2>
-        <input type="email" class="form-control" placeholder="Email"  name="user" required autofocus>
-        <input type="password" class="form-control" placeholder="Password"  name="pass" required>
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" value="login"  >Sign in</button>
-      </form>
+      <?php    
+      if(!isset($_SESSION['userid'])){    
+          
+        echo  '  
+        <form class="form-signin" role="form" action="index.php" method="POST">
+          <h2 class="form-signin-heading">Login</h2>
+          <input type="email" class="form-control" placeholder="Email"  name="user" required autofocus>
+          <input type="password" class="form-control" placeholder="Password"  name="pass" required>
+          <label class="checkbox">
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+          <button class="btn btn-lg btn-primary btn-block" type="submit" name="login" value="login"  >Sign in</button>
+        </form>  ';
+      }
+      
+      else {
+          
+           
+          echo '<form class="form-signin" role="form" action="logout.php" method="POST">'
+          .    ' <button class="btn btn-lg   btn-block label-danger" type="submit" name="logout" value="logout"  >'
+          .         '<span class="glyphicon glyphicon-off"></span> Log out'
+          .     '</button>';
+          
+          
+      }
+         
+         ?>     
              
         </div><!--/span-->
        
         
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="aassert/js/bootstrap.min.js"></script>
-    <script src="aassert/js/docs.min.js"></script>
+   
   </body>
 </html>

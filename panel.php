@@ -18,7 +18,17 @@
   </head>
 
   
+  
   <body>
+    
+      
+    <?php
+    session_start ( ) ;
+    if(!isset($_SESSION['userid'])){
+    header("Location: notAuthorized.html");}
+    
+    ?>
+  
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
@@ -45,6 +55,8 @@
       </div>
     </div>
 
+      
+      
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
