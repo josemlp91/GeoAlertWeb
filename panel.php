@@ -96,14 +96,56 @@
         </div>
           
         <div id="inline">
-            <h2>Send us a Message</h2>
-
+            <h2>Editando Punto</h2>
+            
+            
             <form id="contact" name="contact" action="#" method="post">
-                    <label for="email">Your E-mail</label>
-                    <input type="email" id="email" name="email" class="txt">
-                    <br>
-                    <label for="msg">Enter a Message</label>
-                    <textarea id="msg" name="msg" class="txtarea"></textarea>
+                
+                    <div class="form-group">
+                        <label  for="inputName">Nombre</label>
+                        
+                            <input type="text" id="inputName" name="inputName" class="form-control">
+                        
+                    </div>
+                    
+                    <div class="form-group">
+                        <label  for="inputLat">Nueva Latitud</label>
+                        
+                            <input type="text" id="inputLat" name="inputLat" class="form-control">
+                       
+                    
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="inputLon">Nueva Longitud</label>
+                       
+                            <input type="text" id="inputLon" name="inputLon" class="form-control">
+                        
+                    </div>
+                 
+                    <div class="form-group">
+                    <label for="inputLon">Nueva Tipo</label>
+                    
+                    <select name="tipo" class="form-control">
+                        <option selected></option>
+                        <option>Bar</option>
+                        <option>Supermercado</option>
+                    </select>
+                    </div>
+                    
+                  
+                    
+                    <div class="form-group">
+                    <label for="inputPrio">Nueva Prioridad</label>
+                    
+                    <select name="prio" class="form-control">
+                        <option selected></option>
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                    </div>
+                    
+                    <br><br>
 
                     <button id="send">Send E-mail</button>
             </form>
@@ -162,7 +204,7 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                               <li><a class="modalbox" href="#inline">Edit</a></li>
-                              <li><a href="#">Remove</a></li>
+                              <li><a href="javascript:alert(\'Seguro??\');">Remove</a></li>
                               <li><a href="#">Add Priority</a></li>
                               <li class="divider"></li>
                               <li><a href="#">Separated link</a></li>
