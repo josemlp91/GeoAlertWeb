@@ -14,19 +14,21 @@
     
     <link href="assert//css/bootstrap.min.css" rel="stylesheet">
     <link href="assert//css/dashboard.css" rel="stylesheet">
-
+    
+    
+    
   </head>
 
-  
+    
   
   <body>
     
       
     <?php
-    session_start ( ) ;
-    if(!isset($_SESSION['userid'])){
-    header("Location: notAuthorized.html");}
-    
+        session_start ( ) ;
+        if(!isset($_SESSION['userid'])){
+            header("Location: notAuthorized.html");
+        } 
     ?>
   
 
@@ -43,10 +45,11 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
+            <li><a href="logout.php">Logout</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -75,49 +78,98 @@
               
           </div>
           
+ <?php        
+ 
+ if ($_GET['mode']=='table'){
+              
+    echo   ' <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">'
           
-        <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-          
-          <h2 class="sub-header">Puntos de Interes</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                    
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Latitud</th>
-                  <th>Longitud</th>
-                  <th>Dirección</th>
-                  <th>Tipo</th>
-                  <th>Prioridad</th>
-                  
-                </tr>
-              </thead>
-              <tbody>
+         .' <h2 class="sub-header">Puntos de Interes</h2>'
+         .'  <div class="table-responsive">'
+         .'     <table class="table table-striped">'
+         .'        <thead>'
                 
-                  <!--Emplo -->
+        .'          <tr> '     
+        .'          <th>'
+        .'          <th>Nombre</th>'
+        .'          <th>Latitud</th>'
+        .'          <th>Longitud</th>'
+        .'          <th>Dirección</th>'
+        .'          <th>Tipo</th>'
+        .'          <th>Prioridad</th>'
+          
+        .'        </tr>'
+        .'      </thead>'
+        .'      <tbody>' ;
+                
+
+                 
+                  include 'mongoGPS.php';
+                  $geopoint = $db->geopoint;
+                  $cursor = $geopoint->find();
+                  $cont =1;
+                  foreach ($cursor as $doc) {                      
+                    echo '
+                    <tr>
+                        <td>'.$cont.'</td>
+                        <td>'. $doc['name'] .'</td>
+                        <td>'. $doc['latitud'].'</td>
+                        <td>'.$doc['longitud'].'</td>
+                        <td>'.$doc['direction'].'</td>
+                        <td>'.$doc['type'].'</td>
+                        <td>'.$doc['priority'].'</td>
+                    </tr>
+
+                  ' ;
+
+                    $cont++;
+                  }
                   
-                  <tr>
-                  <td>1</td>
-                  <td>Bar la Alternativa</td>
-                  <td>37.188770</td>
-                  <td>-3.608767</td>
-                  <td>Calle Doctor Azpitarte nº 12, 18012 Granada</td>
-                  <td>Bar</td>
-                  <td>1</td>
-                </tr>
+               ?>
                
               </tbody>
             </table>
           </div>
+          
+               <?php
+    
+     include 'mongoGPS.php';
+    
+    $geopoint = $db->geopoint;
+    
+   // $insert = array("name" => "Bar la Alternativa", "latitud" => "37.188770", "longitud" => "-3.608767",
+   //                 "direction"=>"Calle Doctor Azpitarte nº 12, 18012 Granada", "type"=>"Bar", "priority"=>"1" );
+    
+   // $geopoint->insert($insert);
+    
+    
+    $cursor = $geopoint->find();
+                foreach ($cursor as $doc) {
+                    var_dump($doc);
+                }
+                
+     
+ }
+ 
+ else if ($_GET['mode']=='map'){
+  
+     
+    
+   
+
+     
+ }
+  
+    
+    ?>
+          
         </div>
  
     <!--Panel de usuario-->      
           <div class="col-xs-2 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
           <div class="list-group">
             <a href="#" class="list-group-item active">Jose Miguel</a>
-            <img src="assert//img/josemlp91.jpg"  alt="..."  class="img-responsive">
+            <img src="assert/img/josemlp91.jpg"  alt="..."  class="img-responsive">
             <a href="#" class="list-group-item">Ingeniero Informatico</a>
             <a href="#" class="list-group-item">660281871</a>
             <a href="#" class="list-group-item">josemilope@gmail.com</a>
@@ -134,6 +186,9 @@
     </div>
     
     
+  
+    
+    
           <footer>
         
         
@@ -142,8 +197,13 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    
     <script src="assert/js/bootstrap.min.js"></script>
+    
+   
+    
+ 
+        
     
   </body>
 </html>
