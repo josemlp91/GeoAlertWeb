@@ -1,6 +1,8 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html
+    
+    lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,7 +41,7 @@
             </div>
 
             <div class="jumbotron">
-                <h1>Geographics-Alert <small></small></h1>
+                <h1>Geo Notification <small></small></h1>
                 <p class="lead">Recomendaciones basadas en el pocisionamiento geografico.</p>
 
             </div>

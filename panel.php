@@ -68,15 +68,24 @@
             if ($_GET['mode']=="table"){
                 echo '<li class="active"><a href="panel.php?mode=table">Tabla</a></li>
                       <li><a href="panel.php?mode=map">Mapas</a></li>
-            <li><a href="#">Registrar Nuevo</a></li>';}
+                      <li><a href="panel.php?mode=new">Registrar Nuevo</a></li>';}
             
             else if  ($_GET['mode']=="map"){
                 
                       echo '<li ><a href="panel.php?mode=table">Tabla</a></li>
                       <li class="active"><a href="panel.php?mode=map">Mapas</a></li>
-                      <li><a href="#">Registrar Nuevo</a></li>';
+                      <li><a href="panel.php?mode=new">Registrar Nuevo</a></li>';
                 
             }
+            
+             else if  ($_GET['mode']=="new"){
+                
+                      echo '<li ><a href="panel.php?mode=table">Tabla</a></li>
+                      <li ><a href="panel.php?mode=map">Mapas</a></li>
+                      <li class="active"><a href="panel.php?mode=new">Registrar Nuevo</a></li>';
+                
+            }
+            
             
             ?>  
             
@@ -124,7 +133,7 @@
                   foreach ($cursor as $doc) {                      
                     echo '
                     <tr>
-                        <td>'.$cont.'</td>
+                        <td>'. $cont.'</td>
                         <td>'. $doc['name'] .'</td>
                         <td>'. $doc['latitud'].'</td>
                         <td>'.$doc['longitud'].'</td>
@@ -165,12 +174,24 @@
  }
  
  else if ($_GET['mode']=='map'){
+     
+      include 'mongoGPS.php';  
+      $geopoint = $db->geopoint;
+      $cursor = $geopoint->find();
+      $arrayGeo=array();
+                foreach ($cursor as $doc) {
+                    array_push($arrayGeo, $doc);
+                    
+                }
+                
+          //      var_dump($arrayGeo[0]['name']);
+     
   
-     echo   ' <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">';
+     echo   ' <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 ">';
      
      echo"	
 	<br />
-	<div id=\"map2\" style=\"width: 985px; height: 650px; border: 0px solid #777; overflow: hidden; margin: 0 auto;\"></div>
+	<div id=\"map2\" style=\"width: 785px; height: 650px; border: 0px solid #777; overflow: hidden; margin: 0 auto;\"></div>
 	<br />
 	
 	
@@ -180,27 +201,107 @@
 	
 	<script type=\"text/javascript\">
 		$(document).ready(function() {
-		
 			
-      
-		
-			$('#map2').gMap({ markers: [{latitude: 39.467019, longitude: -0.377135}], 
-                             zoom: 16 
-						});
-			  
-			
+			$('#map2').gMap({ markers: ";
+                        
+                       for ($i=0;$i<count($arrayGeo);$i++){
+                           
+                            echo "
+                                     [{latitude:  ".$arrayGeo[$i]['latitud'].", longitude: ".$arrayGeo[$i]['longitud'].", html:'<p>".$arrayGeo[$i]['name']."</p>'}";                           
+                            echo "   ],  zoom: 16 ";
+                       }
+                echo "			
+                        });
 		});
 		
 	</script>
         
-        </div>
-        ";
+        </div>   ";
 
-     
     
-   
+     
+ }
+ 
+ else if ($_GET['mode']=='new'){
+     
+      echo   ' <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">';
+      echo"
+				<div class=\"panel panel-default\" style=\"margin:-10 auto;width:750px\">
+					<div class=\"panel-heading\">
+						<h2 class=\"panel-title\">Nuevo Punto de Interes</h2>
+					</div>
+					<div class=\"panel-body\">
+						<form name=\"contactform\" method=\"post\" action=\"\" class=\"form-horizontal\" role=\"form\">
+							<div class=\"form-group\">
+								<label for=\"inputName\" class=\"col-lg-2 control-label\">Nombre</label>
+								<div class=\"col-lg-10\">
+									<input type=\"text\" class=\"form-control\" id=\"inputName\" name=\"inputName\" placeholder=\"Nombre del Lugar\">
+								</div>
+							</div>
+							<div class=\"form-group\">
+								<label for=\"inputDire\" class=\"col-lg-2 control-label\">Dirección</label>
+								<div class=\"col-lg-10\">
+									<input type=\"text\" class=\"form-control\" id=\"inputDire\" name=\"inputDire\" placeholder=\"Dirección\">
+								</div>
+							</div>
+							<div class=\"form-group\">
+								<label for=\"inputLatitud\" class=\"col-lg-2 control-label\">Latitud</label>
+								<div class=\"col-lg-10\">
+									<input type=\"text\" class=\"form-control\" id=\"inputLatitud\" name=\"inputLatitud\" placeholder=\"Latitud\">
+								</div>
+							</div>
+                                                        
+                                                        <div class=\"form-group\">
+								<label for=\"inputLongitud\" class=\"col-lg-2 control-label\">Longitud</label>
+								<div class=\"col-lg-10\">
+									<input type=\"text\" class=\"form-control\" id=\"inputLongitud\" name=\"inputLongitud\" placeholder=\"Longitud\">
+								</div>
+							</div>
+                                                        
+                                                             <div class=\"form-group\">
+								<label for=\"inputTipo\" class=\"col-lg-2 control-label\">Tipo</label>
+                                                                <div class=\"col-lg-10\">
+								<select class=  \"   form-control \">
+                                                                    <option>Bar</option>
+                                                                    <option>Restaurante</option>
+                                                                    <option>Supermercado</option>
+                                                                    <option>Tienda de Ropa</option>
+                                                                    <option>Farmacia</option>
+                                                                 </select>
+                                                                 </div>
+                                                            </div>
+                                                            
+                                                                    <div class=\"form-group\">
+								<label for=\"inputTipo\" class=\"col-lg-2 control-label\">Prioridad</label>
+                                                                <div class=\"col-lg-10\">
+								<select class=  \"   form-control \">
+                                                                    <option>1</option>
+                                                                    <option>2</option>
+                                                                    <option>3</option>
+                                                                    <option>4</option>
+                                                                    <option>5</option>
+                                                                 </select>
+                                                                 </div>
+                                                            </div>
+			
+			
+							
+							<div class=\"form-group\">
+								<div class=\"col-lg-offset-2 col-lg-10\">
+									<button type=\"submit\" class=\"btn btn-default\">
+										Guardar Punto
+									</button>
+								</div>
+							</div>
+						</form>
+
+					</div>
+				
+			</div>";
 
      
+     echo "</div>";
+    
  }
   
     
