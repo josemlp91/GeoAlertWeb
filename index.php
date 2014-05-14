@@ -42,7 +42,7 @@
 
             <div class="jumbotron">
                 <h1>Geo Notification <small></small></h1>
-                <p class="lead">Recomendaciones basadas en el pocisionamiento geografico.</p>
+                <p class="lead">Recomendaciones basadas en  pocisionamiento geografico, con cliente Android y IOS.</p>
 
             </div>
 

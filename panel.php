@@ -9,13 +9,14 @@
     <meta name="author" content="">
 
     <title>Panel Administración</title>
-
     
-    
-    <link href="assert//css/bootstrap.min.css" rel="stylesheet">
-    <link href="assert//css/dashboard.css" rel="stylesheet">
-    
-    
+    <link href="assert/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assert/css/dashboard.css" rel="stylesheet">
+    <script src="js/jquery.js"></script> 
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="fancybox/jquery.fancybox.js?v=2.0.6"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="assert/css/styleform.css">
+    <link rel="stylesheet" type="text/css" media="all" href="fancybox/jquery.fancybox.css">
     
   </head>
 
@@ -94,6 +95,20 @@
           
         </div>
           
+        <div id="inline">
+            <h2>Send us a Message</h2>
+
+            <form id="contact" name="contact" action="#" method="post">
+                    <label for="email">Your E-mail</label>
+                    <input type="email" id="email" name="email" class="txt">
+                    <br>
+                    <label for="msg">Enter a Message</label>
+                    <textarea id="msg" name="msg" class="txtarea"></textarea>
+
+                    <button id="send">Send E-mail</button>
+            </form>
+        </div>
+          
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">  
         <h1>Panel de Administración</h1>
       </div>
@@ -140,6 +155,22 @@
                         <td>'.$doc['direction'].'</td>
                         <td>'.$doc['type'].'</td>
                         <td>'.$doc['priority'].'</td>
+                        <td> 
+                            <div class="btn-group">
+                            <button type="button" class="btn  btn-danger dropdown-toggle" data-toggle="dropdown">
+                              Action <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                              <li><a class="modalbox" href="#inline">Edit</a></li>
+                              <li><a href="#">Remove</a></li>
+                              <li><a href="#">Add Priority</a></li>
+                              <li class="divider"></li>
+                              <li><a href="#">Separated link</a></li>
+                            </ul>
+                          </div>
+                        
+                        </td>
+
                     </tr>
 
                   ' ;
@@ -191,7 +222,7 @@
      
      echo"	
 	<br />
-	<div id=\"map2\" style=\"width: 785px; height: 650px; border: 0px solid #777; overflow: hidden; margin: 0 auto;\"></div>
+	<div id=\"map2\" style=\"width: 785px; height: 400px; border: 0px solid #777; overflow: hidden; margin: 0 auto;\"></div>
 	<br />
 	
 	
@@ -202,17 +233,16 @@
 	<script type=\"text/javascript\">
 		$(document).ready(function() {
 			
-			$('#map2').gMap({ markers: ";
+			$('#map2').gMap({ markers: [ ";
                         
                        for ($i=0;$i<count($arrayGeo);$i++){
                            
                             echo "
-                                     [{latitude:  ".$arrayGeo[$i]['latitud'].", longitude: ".$arrayGeo[$i]['longitud'].", html:'<p>".$arrayGeo[$i]['name']."</p>'}";                           
-                            echo "   ],  zoom: 16 ";
+                                     {latitude:  ".$arrayGeo[$i]['latitud'].", longitude: ".$arrayGeo[$i]['longitud'].", html:'<p>".$arrayGeo[$i]['name']."</p>'},";                           
+                            
                        }
-                echo "			
-                        });
-		});
+                       echo "   ],  zoom: 16 });";
+                echo "	});
 		
 	</script>
         
@@ -231,7 +261,7 @@
 						<h2 class=\"panel-title\">Nuevo Punto de Interes</h2>
 					</div>
 					<div class=\"panel-body\">
-						<form name=\"contactform\" method=\"post\" action=\"\" class=\"form-horizontal\" role=\"form\">
+						<form name=\"contactform\" method=\"post\" action=\"saveMongoGeo.php\" class=\"form-horizontal\" role=\"form\">
 							<div class=\"form-group\">
 								<label for=\"inputName\" class=\"col-lg-2 control-label\">Nombre</label>
 								<div class=\"col-lg-10\">
@@ -261,7 +291,7 @@
                                                              <div class=\"form-group\">
 								<label for=\"inputTipo\" class=\"col-lg-2 control-label\">Tipo</label>
                                                                 <div class=\"col-lg-10\">
-								<select class=  \"   form-control \">
+								<select name=\"type\" class=  \"   form-control \">
                                                                     <option>Bar</option>
                                                                     <option>Restaurante</option>
                                                                     <option>Supermercado</option>
@@ -274,7 +304,7 @@
                                                                     <div class=\"form-group\">
 								<label for=\"inputTipo\" class=\"col-lg-2 control-label\">Prioridad</label>
                                                                 <div class=\"col-lg-10\">
-								<select class=  \"   form-control \">
+								<select name=\"pry\" class=  \"   form-control \">
                                                                     <option>1</option>
                                                                     <option>2</option>
                                                                     <option>3</option>
@@ -342,8 +372,67 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     
-    <script src="assert/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+	function validateEmail(email) { 
+		var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return reg.test(email);
+	}
+
+	$(document).ready(function() {
+		$(".modalbox").fancybox();
+		$("#contact").submit(function() { return false; });
+
+		
+		$("#send").on("click", function(){
+			var emailval  = $("#email").val();
+			var msgval    = $("#msg").val();
+			var msglen    = msgval.length;
+			var mailvalid = validateEmail(emailval);
+			
+			if(mailvalid == false) {
+				$("#email").addClass("error");
+			}
+			else if(mailvalid == true){
+				$("#email").removeClass("error");
+			}
+			
+			if(msglen < 4) {
+				$("#msg").addClass("error");
+			}
+			else if(msglen >= 4){
+				$("#msg").removeClass("error");
+			}
+			
+			if(mailvalid == true && msglen >= 4) {
+				// if both validate we attempt to send the e-mail
+				// first we hide the submit btn so the user doesnt click twice
+				$("#send").replaceWith("<em>sending...</em>");
+				
+				$.ajax({
+					type: 'POST',
+					url: 'sendmessage.php',
+					data: $("#contact").serialize(),
+					success: function(data) {
+						if(data == "true") {
+							$("#contact").fadeOut("fast", function(){
+								$(this).before("<p><strong>Success! Your feedback has been sent, thanks :)</strong></p>");
+								setTimeout("$.fancybox.close()", 1000);
+							});
+						}
+					}
+				});
+			}
+		});
+	});
+        
+        
+</script>
     
+    
+    
+    
+    
+
    
     
  
