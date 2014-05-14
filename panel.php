@@ -64,9 +64,22 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Tabla</a></li>
-            <li><a href="#">Mapas</a></li>
-            <li><a href="#">Registrar Nuevo</a></li>
+            <?php 
+            if ($_GET['mode']=="table"){
+                echo '<li class="active"><a href="panel.php?mode=table">Tabla</a></li>
+                      <li><a href="panel.php?mode=map">Mapas</a></li>
+            <li><a href="#">Registrar Nuevo</a></li>';}
+            
+            else if  ($_GET['mode']=="map"){
+                
+                      echo '<li ><a href="panel.php?mode=table">Tabla</a></li>
+                      <li class="active"><a href="panel.php?mode=map">Mapas</a></li>
+                      <li><a href="#">Registrar Nuevo</a></li>';
+                
+            }
+            
+            ?>  
+            
             
           </ul>
           
@@ -148,11 +161,41 @@
                     var_dump($doc);
                 }
                 
-     
+     echo " </div>";
  }
  
  else if ($_GET['mode']=='map'){
   
+     echo   ' <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">';
+     
+     echo"	
+	<br />
+	<div id=\"map2\" style=\"width: 985px; height: 650px; border: 0px solid #777; overflow: hidden; margin: 0 auto;\"></div>
+	<br />
+	
+	
+	<script type=\"text/javascript\" src=\"http://maps.google.com/maps/api/js?sensor=false\"></script>
+	<script type=\"text/javascript\" src=\"assert/js/jquery.js\"></script>
+	<script type=\"text/javascript\" src=\"assert/js/jquery.gmap.js\"></script>
+	
+	<script type=\"text/javascript\">
+		$(document).ready(function() {
+		
+			
+      
+		
+			$('#map2').gMap({ markers: [{latitude: 39.467019, longitude: -0.377135}], 
+                             zoom: 16 
+						});
+			  
+			
+		});
+		
+	</script>
+        
+        </div>
+        ";
+
      
     
    
@@ -163,7 +206,7 @@
     
     ?>
           
-        </div>
+       
  
     <!--Panel de usuario-->      
           <div class="col-xs-2 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
