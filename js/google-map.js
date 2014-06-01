@@ -29,8 +29,8 @@ jQuery(document).ready(function(){
       }
       else
       {
-        //Si no creamos el objeto con una latitud cualquiera como la de Mar del Plata, Argentina por ej
-         var latLng = new google.maps.LatLng(37.0625,-95.677068);
+        
+         var latLng = new google.maps.LatLng(37.32621641314005,-4.004073416918914);
       }
       //Definimos algunas opciones del mapa a crear
        var myOptions = {
@@ -39,7 +39,7 @@ jQuery(document).ready(function(){
           mapTypeId: google.maps.MapTypeId.ROADMAP //tipo de mapa, carretera, híbrido,etc
         };
         
-        //creamos el mapa con las opciones anteriores y le pasamos el elemento div
+        
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
          
         //creamos el marcador en el mapa
@@ -49,8 +49,7 @@ jQuery(document).ready(function(){
             draggable: true //que el marcador se pueda arrastrar
         });
         
-       //función que actualiza los input del formulario con las nuevas latitudes
-       //Estos campos suelen ser hidden
+       
         updatePosition(latLng);
          
          

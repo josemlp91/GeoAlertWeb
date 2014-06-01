@@ -324,7 +324,7 @@
                                                         
                                                         <div class=\"form-group\">
 								<div class=\"col-lg-offset-2 col-lg-10\">
-									<button id=\"pasar\">Pasar al mapa</button>
+									<button id=\"pasar\" class=\"btn btn-default\">Pasar al mapa </button>
 								</div>
 							</div>
 
