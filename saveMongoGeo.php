@@ -7,9 +7,9 @@
  */
 
        $name = $_POST['inputName'];
-       $dir  = $_POST['inputDire'];
-       $lat  = $_POST['inputLatitud'];
-       $lon  = $_POST['inputLongitud'];
+       $dir  = $_POST['direccion'];        //cambiarloo
+       $lat  = $_POST['lat'];     //
+       $lon  = $_POST['lng'];    //
        $tipo = $_POST['type'];
        $pri  = $_POST['pry'];
         
@@ -29,7 +29,7 @@
                     var_dump($doc);
                 }
         
-
+    header("Location: panel.php?mode=table");
 
 
 ?>

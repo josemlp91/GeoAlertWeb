@@ -18,6 +18,9 @@
     <link rel="stylesheet" type="text/css" media="all" href="assert/css/styleform.css">
     <link rel="stylesheet" type="text/css" media="all" href="fancybox/jquery.fancybox.css">
     
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCoUO24w1meuXBvOtVhz6MsCohrTW1seos&sensor=true"></script>
+    <script src="js/google-map.js"></script>
+    
   </head>
 
     
@@ -30,6 +33,8 @@
         if(!isset($_SESSION['userid'])){
             header("Location: notAuthorized.html");
         } 
+        
+        
     ?>
   
 
@@ -313,22 +318,34 @@
 							<div class=\"form-group\">
 								<label for=\"inputDire\" class=\"col-lg-2 control-label\">Dirección</label>
 								<div class=\"col-lg-10\">
-									<input type=\"text\" class=\"form-control\" id=\"inputDire\" name=\"inputDire\" placeholder=\"Dirección\">
+									<input type=\"text\" class=\"form-control\" id=\"direccion\" name=\"direccion\" placeholder=\"Dirección\">
 								</div>
 							</div>
+                                                        
+                                                        <div class=\"form-group\">
+								<div class=\"col-lg-offset-2 col-lg-10\">
+									<button id=\"pasar\">Pasar al mapa</button>
+								</div>
+							</div>
+
+
+
 							<div class=\"form-group\">
 								<label for=\"inputLatitud\" class=\"col-lg-2 control-label\">Latitud</label>
 								<div class=\"col-lg-10\">
-									<input type=\"text\" class=\"form-control\" id=\"inputLatitud\" name=\"inputLatitud\" placeholder=\"Latitud\">
+									<input type=\"text\" class=\"form-control\" name=\"lat\" id=\"lat\" placeholder=\"Latitud\">
 								</div>
 							</div>
                                                         
                                                         <div class=\"form-group\">
 								<label for=\"inputLongitud\" class=\"col-lg-2 control-label\">Longitud</label>
 								<div class=\"col-lg-10\">
-									<input type=\"text\" class=\"form-control\" id=\"inputLongitud\" name=\"inputLongitud\" placeholder=\"Longitud\">
+									<input type=\"text\" class=\"form-control\" name=\"lng\" id=\"long\" placeholder=\"Longitud\">
 								</div>
 							</div>
+                                                        
+                                                         <div id=\"map_canvas\" style=\"width:450px; margin-bottom:10px; margin-left:160px; height:300px;\"></div>
+
                                                         
                                                              <div class=\"form-group\">
 								<label for=\"inputTipo\" class=\"col-lg-2 control-label\">Tipo</label>
@@ -343,7 +360,7 @@
                                                                  </div>
                                                             </div>
                                                             
-                                                                    <div class=\"form-group\">
+                                                             <div class=\"form-group\">
 								<label for=\"inputTipo\" class=\"col-lg-2 control-label\">Prioridad</label>
                                                                 <div class=\"col-lg-10\">
 								<select name=\"pry\" class=  \"   form-control \">
@@ -355,6 +372,8 @@
                                                                  </select>
                                                                  </div>
                                                             </div>
+                                                            
+                                                           
 			
 			
 							
