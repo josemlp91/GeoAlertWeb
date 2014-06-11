@@ -11,3 +11,7 @@ El pocicionamiento se realiza usando la API de google Maps
   
 - [Repositorio Backend, panel web en PHP](https://github.com/josemlp91/GeoAlertWeb) ``usuario ejemplo: jose@ugr.es 12345``
 - [Cliente Andoid](https://github.com/josemlp91/GeoAlertAndroid)
+
+Aplicacion web en funcionamiento:
+
+[http://geoalertnotification-josemlp.rhcloud.com/](http://geoalertnotification-josemlp.rhcloud.com/)
